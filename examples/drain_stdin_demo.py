@@ -8,6 +8,9 @@ from os.path import dirname
 from drain3 import TemplateMiner
 from drain3.template_miner_config import TemplateMinerConfig
 
+import csv
+import codecs
+
 # persistence_type = "NONE"
 # persistence_type = "REDIS"
 # persistence_type = "KAFKA"
@@ -46,16 +49,45 @@ template_miner = TemplateMiner(persistence, config)
 print(f"Drain3 started with '{persistence_type}' persistence")
 print(f"{len(config.masking_instructions)} masking instructions are in use")
 print(f"Starting training mode. Reading from std-in ('q' to finish)")
+
+# 读文件
+in_log_file = "HDFS.log"
+path = "F:\LogAnomalyDetection\Log_Parse_Drain3\examples\Parsed"
+
+# 打开CSV文件
+csvfile = open(path + '.csv', 'w', newline='')  # python3下
+writer = csv.writer(csvfile, delimiter=',')
+
 while True:
-    log_line = input("> ")
-    if log_line == 'q':
-        break
-    result = template_miner.add_log_message(log_line)
-    result_json = json.dumps(result)
-    print(result_json)
-    template = result["template_mined"]
-    params = template_miner.extract_parameters(template, log_line)
-    print("Parameters: " + str(params))
+    with open(in_log_file) as f:
+        lines = f.readlines()
+
+    Flag = True
+    # https://blog.csdn.net/qq_23926575/article/details/72788485
+
+    dic = json.loads(result_json)
+    keys = list(dic.keys())
+    print(keys)
+    writer.writerow(keys)
+    # 遍历日志文件
+    for line in lines:
+        result = template_miner.add_log_message(line)
+        print(result)
+        result_json = json.dumps(result)
+        # print(result_json)
+        template = result["template_mined"]
+        params = template_miner.extract_parameters(template, line)
+        # print("Parameters: " + str(params))
+
+        dic = json.loads(line)
+
+        # 读取json数据的每一行，将values数据一次一行的写入csv中
+        writer.writerow(list(dic.values()))
+
+
+
+
+
 
 print("Training done. Mined clusters:")
 for cluster in template_miner.drain.clusters:
