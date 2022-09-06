@@ -52,7 +52,7 @@ template_miner = TemplateMiner(persistence, config)
 
 # 读文件
 in_log_file = "HDFS.log"
-path = "F:\LogAnomalyDetection\Log_Parse_Drain3\examples\Parsed"
+path = "F:\LogAnomalyDetection\Log_Parse_Drain3\examples\Parsed_Paramters"
 
 # 打开CSV文件
 
@@ -79,22 +79,36 @@ while True:
 
 
     # 遍历日志文件
+    i = 0
+    Parameter_Lists = []
     for line in lines:
         result = template_miner.add_log_message(line)
-        print(type(result))
-        print(result)
         result_json = json.dumps(result)
         dic = json.loads(result_json)
-        print(dic)
-        if flag:
-            # 获取属性列表
-            keys = list(dic.keys())
-            print(keys)
-            writer.writerow(keys)  # 将属性列表写入csv中
-            flag = False
-        writer.writerow(list(dic.values()))
-    result_json.close()
-    csvfile.close()
+        template = result["template_mined"]
+        params = template_miner.extract_parameters(template, line)
+        print(params)
+        Parameter_List = []
+        for i in range(len(params)):
+            print(str(list(params[i])).strip('[]'))
+            Parameter_List.append(str(list(params[i])).strip('[]'))
+        writer.writerow(Parameter_List)
+        i = i + 1
+        print(Parameter_List)
+        print("------------------------------------------")
+
+
+
+    #
+    #     if flag:
+    #         # 获取属性列表
+    #         keys = list(dic.keys())
+    #         print(keys)
+    #         writer.writerow(keys)  # 将属性列表写入csv中
+    #         flag = False
+    #     writer.writerow(list(dic.values()))
+    # result_json.close()
+    # csvfile.close()
 
         # template = result["template_mined"]
         # params = template_miner.extract_parameters(template, line)
