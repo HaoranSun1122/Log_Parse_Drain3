@@ -46,13 +46,10 @@ config.load(dirname(__file__) + "/drain3.ini")
 config.profiling_enabled = False
 
 template_miner = TemplateMiner(persistence, config)
-# print(f"Drain3 started with '{persistence_type}' persistence")
-# print(f"{len(config.masking_instructions)} masking instructions are in use")
-# print(f"Starting training mode. Reading from std-in ('q' to finish)")
 
 # 读文件
 in_log_file = "HDFS.log"
-path = "F:\LogAnomalyDetection\Log_Parse_Drain3\examples\Parsed_Paramters"
+path = "F:\LogAnomalyDetection\Log_Parse_Drain3\examples\Parsed_Parameter"
 
 # 打开CSV文件
 
@@ -63,24 +60,9 @@ while True:
     with open(in_log_file) as f:
         lines = f.readlines()
 
-    flag = True
-    # for line in lines:
-    #     result = template_miner.add_log_message(line)
-    #     result_json = json.dumps(result)
-    #     dic = json.loads(result_json)
-    #     keys = list(dic.keys())
-    #     print(keys)
-        # if flag:
-        #     # 获取属性列表
-        #     keys = list(dic.keys())
-        #     print(keys)
-        #     writer.writerow(keys)  # 将属性列表写入csv中
-        #     flag = False
-
 
     # 遍历日志文件
-    i = 0
-    Parameter_Lists = []
+
     for line in lines:
         result = template_miner.add_log_message(line)
         result_json = json.dumps(result)
@@ -93,7 +75,6 @@ while True:
             print(str(list(params[i])).strip('[]'))
             Parameter_List.append(str(list(params[i])).strip('[]'))
         writer.writerow(Parameter_List)
-        i = i + 1
         print(Parameter_List)
         print("------------------------------------------")
 
