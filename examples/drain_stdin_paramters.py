@@ -72,8 +72,8 @@ while True:
         print(params)
         Parameter_List = []
         for i in range(len(params)):
-            print(str(list(params[i])).strip('[]'))
-            Parameter_List.append(str(list(params[i])).strip('[]'))
+            print(str(list(params[i])).replace('[', '').replace(']', '').replace("'", ""))
+            Parameter_List.append(str(list(params[i])).replace('[', '').replace(']', '').replace("'", ""))
         writer.writerow(Parameter_List)
         print(Parameter_List)
         print("------------------------------------------")
