@@ -1,13 +1,12 @@
 import pandas as pd
+import csv
 
+csvfile = open('Parsed_Parameter.csv',encoding='utf-8')
+df = pd.read_csv(csvfile,engine='python')
+print(range(len(df)))
 
-file1 = open('Parsed_Parameter.csv', 'r').readlines()
-fileout = open('Parsed_Parameter_New.csv', 'w')
-for line in file1:
-    # fileout.write(line.replace('"', ''))
-    print(fileout.write(line.replace('"', '')))
-fileout.close()
-
+for i in range(len(df)):
+    print(df[i])
 
 
 

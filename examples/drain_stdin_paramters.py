@@ -71,10 +71,16 @@ while True:
         params = template_miner.extract_parameters(template, line)
         print(params)
         Parameter_List = []
+        Parameter_Str = ''
         for i in range(len(params)):
-            print(str(list(params[i])).replace('[', '').replace(']', '').replace("'", ""))
-            Parameter_List.append(str(list(params[i])).replace('[', '').replace(']', '').replace("'", ""))
+            print(str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', ''))
+            # 此处修改为str
+            Parameter_Str = Parameter_Str + str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', '') + ", "
+            # Parameter_List.append(str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', ''))
+        Parameter_Str = Parameter_Str[:-2]
+        Parameter_List.append(Parameter_Str)
         writer.writerow(Parameter_List)
+        print(Parameter_Str)
         print(Parameter_List)
         print("------------------------------------------")
 
