@@ -49,7 +49,7 @@ template_miner = TemplateMiner(persistence, config)
 
 # 读文件
 in_log_file = "HDFS.log"
-path = "F:\LogAnomalyDetection\Log_Parse_Drain3\examples\Parsed_Parameter"
+path = "F:\Drain\Log_Parse_Drain3\examples\Parsed_Parameter1"
 
 # 打开CSV文件
 
@@ -73,14 +73,17 @@ while True:
         Parameter_List = []
         Parameter_Str = ''
         for i in range(len(params)):
-            print(str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', ''))
+            print(list(params[i]))
+            print(str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', '').split(', '))
+            Parameter_List = Parameter_List + str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', '').split(', ')
             # 此处修改为str
-            Parameter_Str = Parameter_Str + str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', '') + ", "
+            # Parameter_Str = Parameter_Str + str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', '') + ", "
             # Parameter_List.append(str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', ''))
-        Parameter_Str = Parameter_Str[:-2]
-        Parameter_List.append(Parameter_Str)
+        # Parameter_Str = Parameter_Str[:-2]
+        # Parameter_List.append(Parameter_Str)
+        print(Parameter_List)
         writer.writerow(Parameter_List)
-        print(Parameter_Str)
+        # print(Parameter_Str)
         print(Parameter_List)
         print("------------------------------------------")
 
