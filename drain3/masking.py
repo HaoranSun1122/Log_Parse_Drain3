@@ -65,7 +65,7 @@ class LogMasker:
     def instructions_by_mask_name(self, mask_name: str) -> Optional[Collection[AbstractMaskingInstruction]]:
         return self.mask_name_to_instructions.get(mask_name, [])
 
-# Some masking examples
+# Some masking HDFS
 # ---------------------
 #
 # masking_instances = [

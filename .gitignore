@@ -6,7 +6,7 @@ venv/*
 .vscode/*
 drain3.egg-info/*
 snapshot.txt
-examples/snapshot.txt
+HDFS/snapshot.txt
 *.bin
 *.log
 *.gz

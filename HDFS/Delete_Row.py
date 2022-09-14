@@ -23,16 +23,20 @@ import csv
 #         print(i)
 # fileout.close()
 
-# df = pd.read_csv("Parsed_Parameter.csv")
-#
-# error_bad_lines=False #加入参数
-# df.drop(df.index[11175630:20743527],inplace=True)
-# df.to_csv("Parsed_Parameter.csv",index=False,encoding="utf-8")
 
-
-import pandas
-
-df = pandas.read_csv('Parsed_Parameter1.csv',header=None)
+# 14/09能用的删除行方法！！！
+df = pd.read_csv("Parsed_Parameter2.csv", encoding='utf-8', header=None, sep = '\t')
+error_bad_lines=False #加入参数
 print(df)
+# df.drop(df.index[11175629:18092331], inplace=True)
+# df.to_csv("Parsed_Parameter2.csv", index=False, encoding="utf-8")
+print(df)
+# 14/09能用的删除行方法！！！
+
+
+# import pandas
+#
+# df = pandas.read_csv('Parsed_Parameter2.csv', encoding='utf-8',header=None,sep = '\t')
+# print(df)
 # df.replace('"', '', inplace=True, regex=True)
 # df.to_csv("file.csv",header=False, index=False)
