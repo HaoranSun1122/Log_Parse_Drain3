@@ -25,12 +25,13 @@ import csv
 
 
 # 14/09能用的删除行方法！！！
-df = pd.read_csv("Parsed_Parameter2.csv", encoding='utf-8', header=None, sep = '\t')
-error_bad_lines=False #加入参数
+df = pd.read_csv("Parsed_Parameter1.csv", encoding='utf-8',sep = '\t')
+# error_bad_lines=False #加入参数
 print(df)
-# df.drop(df.index[11175629:18092331], inplace=True)
-# df.to_csv("Parsed_Parameter2.csv", index=False, encoding="utf-8")
-print(df)
+df.drop(df.index[11175628:19617607], inplace=True)
+df.to_csv("Parsed_Parameter2.csv", index=False, encoding="utf-8")
+df2 = pd.read_csv("Parsed_Parameter1.csv", encoding='utf-8',sep = '\t')
+print(df2)
 # 14/09能用的删除行方法！！！
 
 
