@@ -56,37 +56,36 @@ path = "F:\LogAnomalyDetection\Log_Parse_Drain3\BGL_Parse\Parsed_Parameter"
 csvfile = open(path + '.csv', 'w', newline='')  # python3下
 writer = csv.writer(csvfile, delimiter=',')
 
-while True:
-    with open(in_log_file) as f:
-        lines = f.readlines()
-
+with open(in_log_file) as f:
+    lines = f.readlines()
 
     # 遍历日志文件
 
-    for line in lines:
-        result = template_miner.add_log_message(line)
-        result_json = json.dumps(result)
-        dic = json.loads(result_json)
-        template = result["template_mined"]
-        params = template_miner.extract_parameters(template, line)
-        print(params)
-        writer.writerow(params)
-        Parameter_List = []
-        Parameter_Str = ''
-        for i in range(len(params)):
-            print(list(params[i]))
-            # print(str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', '').split(', '))
-            # Parameter_List = Parameter_List + str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', '').split(', ')
-            # 此处修改为str
-            # Parameter_Str = Parameter_Str + str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', '') + ", "
-            # Parameter_List.append(str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', ''))
-        # Parameter_Str = Parameter_Str[:-2]
-        # Parameter_List.append(Parameter_Str)
-        print(Parameter_List)
-        # writer.writerow(Parameter_List)
-        # print(Parameter_Str)
-        print(Parameter_List)
-        print("------------------------------------------")
+for line in lines:
+    result = template_miner.add_log_message(line)
+    result_json = json.dumps(result)
+    dic = json.loads(result_json)
+    template = result["template_mined"]
+    params = template_miner.extract_parameters(template, line)
+    print(params)
+    writer.writerow(params)
+    # Parameter_List = []
+    # Parameter_Str = ''
+    # for i in range(len(params)):
+    #     print(list(params[i]))
+    # print(str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', '').split(', '))
+    # Parameter_List = Parameter_List + str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', '').split(', ')
+    # 此处修改为str
+    # Parameter_Str = Parameter_Str + str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', '') + ", "
+    # Parameter_List.append(str(list(params[i])).replace('[', '').replace(']', '').replace("'", "").replace('"', ''))
+    # Parameter_Str = Parameter_Str[:-2]
+    # Parameter_List.append(Parameter_Str)
+    # print(Parameter_List)
+    # writer.writerow(Parameter_List)
+    # print(Parameter_Str)
+    # print(Parameter_List)
+    print("------------------------------------------")
 
+csvfile.close()
 
-    #     解析字符串，把“去掉之后，然后把后面的删掉
+#     解析字符串，把“去掉之后，然后把后面的删掉
